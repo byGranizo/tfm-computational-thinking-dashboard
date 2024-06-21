@@ -1,0 +1,16 @@
+.login {
+  background-color: darkgray;
+  height: 100vh;
+  align-content: center;
+
+  & * {
+    margin: 0 auto;
+  }
+}
+
+.login__form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 5px;
+  width: 300px;
+}

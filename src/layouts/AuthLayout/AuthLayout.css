@@ -1,0 +1,14 @@
+.auth-layout {
+  display: flex;
+  flex-direction: row;
+}
+
+@media screen and (width < 768px) {
+  .auth-layout {
+    flex-direction: column;
+    main {
+      margin-top: 1.5rem;
+      margin-bottom: 2.375rem;
+    }
+  }
+}

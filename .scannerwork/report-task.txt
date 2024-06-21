@@ -1,0 +1,6 @@
+projectKey=tfm-computational-thinking-web
+serverUrl=http://localhost:9000
+serverVersion=10.5.1.90531
+dashboardUrl=http://localhost:9000/dashboard?id=tfm-computational-thinking-web
+ceTaskId=053dda89-e02c-4d8f-8a66-c3027ea9617c
+ceTaskUrl=http://localhost:9000/api/ce/task?id=053dda89-e02c-4d8f-8a66-c3027ea9617c
