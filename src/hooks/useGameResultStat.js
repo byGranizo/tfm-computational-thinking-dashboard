@@ -1,8 +1,8 @@
 //Proporción de partidas no terminadas/ganadas/perdidas respecto al total
 
 import { useState, useCallback, useEffect } from 'react'
-
-export const useGameResultStat = () => { 
+import { getGames } from '../services/data'
+export const useGameResultStat = () => {
   const [data, setData] = useState([])
 
   const calculateGameResultStat = useCallback((games) => {
@@ -11,13 +11,13 @@ export const useGameResultStat = () => {
     let lostGames = 0
     let notFinishedGames = 0
 
-    games.forEach(game => {
-      if(game.result === true){
+    games.forEach((game) => {
+      if (game.result === true) {
         winnedGames++
         return
       }
 
-      if(game.result === false){
+      if (game.result === false) {
         winnedGames++
         return
       }
@@ -30,27 +30,32 @@ export const useGameResultStat = () => {
     const notFinishedGamesRatio = (notFinishedGames / totalGames) * 100
 
     setData[
-      {
-        label: "Win",
+      ({
+        label: 'Win',
         total: winnedGames,
-        ratio: winnedGamesRatio
+        ratio: winnedGamesRatio,
       },
       {
-        label: "Lost",
+        label: 'Lost',
         total: lostGames,
-        ratio: lostGamesRatio
+        ratio: lostGamesRatio,
       },
       {
-        label: "Not Finished",
+        label: 'Not Finished',
         total: notFinishedGames,
-        ratio: notFinishedGamesRatio
-      }
+        ratio: notFinishedGamesRatio,
+      })
     ]
   }, [])
 
   useEffect(() => {
-    calculateGameResultStat(games)
-  }, [])
+    async function fetchData() {
+      const games = await getGames()
+      calculateGameResultStat(games)
+    }
+
+    fetchData()
+  }, [calculateGameResultStat])
 
   return data
 }
