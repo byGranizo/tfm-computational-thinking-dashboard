@@ -10,7 +10,7 @@ export const useTurnsToCompleteMissionByDifficultyStat = () => {
 
     missions.forEach((mission) => {
       const difficulty = mission.difficulty
-      const turns = mission.turns
+      const turns = mission.turn_end - mission.turn_start
 
       if (difficulties[difficulty]) {
         difficulties[difficulty].totalTurns += turns

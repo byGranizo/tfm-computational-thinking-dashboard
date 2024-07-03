@@ -15,7 +15,7 @@ export const useGameWinLoseRatioStat = () => {
       let winnedGames = 0
       let lostGames = 0
 
-      nGame.forEach((game) => {
+      Object.entries(nGame).forEach(([, game]) => {
         if (game.result === true) {
           winnedGames++
           return

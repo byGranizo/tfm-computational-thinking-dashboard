@@ -54,7 +54,7 @@ export async function getGames() {
 export async function getMissionsCompleted() {
   const missions = []
 
-  const q = query(missionRef, orderBy('timestamp', 'asc'))
+  const q = query(missionRef, orderBy('date', 'asc'))
   const querySnapshot = await getDocs(q)
 
   querySnapshot.forEach((doc) => {

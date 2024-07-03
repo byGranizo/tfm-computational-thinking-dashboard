@@ -3,6 +3,11 @@ import { useEffect, useState } from 'react'
 import { getTurns } from '@/services/data'
 import { DonutChart, Legend } from '@tremor/react'
 
+import { useGameResultStat } from '@/hooks/useGameResultStat'
+import { useGameWinLoseRatioStat } from '@/hooks/useGameWinLoseRatioStat'
+import { useTurnsToCompleteMissionByDifficultyStat } from '@/hooks/useTurnsToCompleteMissionByDifficultyStat'
+import { useTurnsToCompleteMissionByBiomeStat } from '@/hooks/useTurnsToCompleteMissionByBiomeStat'
+
 const sales = [
   {
     name: 'New York',
@@ -29,26 +34,15 @@ const sales = [
 const valueFormatter = (number) => `$ ${Intl.NumberFormat('us').format(number).toString()}`
 
 export function Home() {
-  const [turns, setTurns] = useState([])
+  //const gameResultStat = useGameResultStat()
+  //const winLoseRarioPerGame = useGameWinLoseRatioStat()
+  //const turnsToMissionByDifficulty = useTurnsToCompleteMissionByDifficultyStat()
+  const turnsToMissionByBiome = useTurnsToCompleteMissionByBiomeStat()
 
-  useEffect(() => {
-    async function fetchTurns() {
-      const turns = await getTurns()
-      setTurns(turns)
-    }
-
-    fetchTurns()
-  }, [])
+  console.log(turnsToMissionByBiome)
   return (
     <div className='home'>
       <h1>Home</h1>
-      <ul>
-        {turns.map((turn, index) => (
-          <li key={index}>
-            {turn.id} - {turn.game_id} - {turn.turn_n}
-          </li>
-        ))}
-      </ul>
 
       <div className='flex items-center justify-center space-x-6'>
         <DonutChart
@@ -68,3 +62,8 @@ export function Home() {
     </div>
   )
 }
+
+/*
+admin@riverwood.com
+admin1234
+*/

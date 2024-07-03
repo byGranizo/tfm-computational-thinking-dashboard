@@ -29,8 +29,8 @@ export const useGameResultStat = () => {
     const lostGamesRatio = (lostGames / totalGames) * 100
     const notFinishedGamesRatio = (notFinishedGames / totalGames) * 100
 
-    setData[
-      ({
+    setData([
+      {
         label: 'Win',
         total: winnedGames,
         ratio: winnedGamesRatio,
@@ -44,8 +44,8 @@ export const useGameResultStat = () => {
         label: 'Not Finished',
         total: notFinishedGames,
         ratio: notFinishedGamesRatio,
-      })
-    ]
+      },
+    ])
   }, [])
 
   useEffect(() => {
