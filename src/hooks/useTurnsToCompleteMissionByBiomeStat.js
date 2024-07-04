@@ -16,7 +16,6 @@ export const useTurnsToCompleteMissionByBiomeStat = () => {
       if (biomes[biome]) {
         biomes[biome].totalTurns += turns
         biomes[biome].totalMissions++
-        return
       } else {
         biomes[biome] = {
           totalTurns: turns,

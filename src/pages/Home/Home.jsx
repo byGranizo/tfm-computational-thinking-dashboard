@@ -1,4 +1,3 @@
-import './Home.css'
 import { DonutChart, Legend, LineChart, BarChart } from '@tremor/react'
 
 import { useGameResultStat } from '@/hooks/useGameResultStat'

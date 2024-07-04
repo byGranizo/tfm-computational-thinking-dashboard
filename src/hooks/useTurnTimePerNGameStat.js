@@ -23,8 +23,6 @@ export const useTurnTimePerNGameStat = () => {
       }
     })
 
-    console.log(averageTimePerNTurn)
-
     setData(averageTimePerNTurn)
   }, [])
 

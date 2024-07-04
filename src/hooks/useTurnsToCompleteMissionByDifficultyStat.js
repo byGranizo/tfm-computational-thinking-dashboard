@@ -15,7 +15,6 @@ export const useTurnsToCompleteMissionByDifficultyStat = () => {
       if (difficulties[difficulty]) {
         difficulties[difficulty].totalTurns += turns
         difficulties[difficulty].totalMissions++
-        return
       } else {
         difficulties[difficulty] = {
           totalTurns: turns,
