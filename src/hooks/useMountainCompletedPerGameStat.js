@@ -11,7 +11,9 @@ export const useMountainCompletedPerGameStat = () => {
 
   const calculateMountainsCompletedPerGameStat = useCallback((games, missions) => {
     const gamesWithMountainsNumber = games.map((game) => {
-      const mountains = missions.filter((mission) => mission.gameId === game.id && mission.wildcard)
+      const mountains = missions.filter(
+        (mission) => mission.game_id === game.id && mission.wildcard
+      )
 
       return {
         ...game,
@@ -21,18 +23,19 @@ export const useMountainCompletedPerGameStat = () => {
 
     const gamesParsed = groupGamesByNMatchOfTheUser(gamesWithMountainsNumber)
 
-    const mountainsCompletedPerGame = gamesParsed.map((nGame) => {
+    const mountainsCompletedPerGame = gamesParsed.map((nGame, index) => {
       const totalGames = Object.keys(nGame).length
       let mountainsCompleted = 0
 
-      nGame.forEach((game) => {
+      Object.values(nGame).forEach((game) => {
         mountainsCompleted += game.mountainsNumber
       })
 
       return {
+        index: index + 1,
         total: totalGames,
         mountainsCompleted,
-        averageMountains: totalGames / mountainsCompleted,
+        averageMountains: mountainsCompleted / totalGames,
       }
     })
 

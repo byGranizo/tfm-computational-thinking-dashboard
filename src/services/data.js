@@ -22,7 +22,7 @@ export async function getTurnsTest() {
 export async function getTurns() {
   const turns = []
 
-  const q = query(turnRef, orderBy('timestamp', 'acs'))
+  const q = query(turnRef)
   const querySnapshot = await getDocs(q)
 
   querySnapshot.forEach((doc) => {

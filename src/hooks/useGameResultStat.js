@@ -18,7 +18,7 @@ export const useGameResultStat = () => {
       }
 
       if (game.result === false) {
-        winnedGames++
+        lostGames++
         return
       }
 

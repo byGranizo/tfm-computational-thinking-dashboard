@@ -10,33 +10,34 @@ export const useTilesMissionCompletedPerGame = () => {
   const [data, setData] = useState([])
 
   const calculateMissionsCompletedPerGameStat = useCallback((games, missions) => {
-    const gamesWithMountainsNumber = games.map((game) => {
-      const mountains = missions.filter((mission) => mission.gameId === game.id)
+    const gamesWithMissionsNumber = games.map((game) => {
+      const missionsOfGame = missions.filter((mission) => mission.game_id === game.id)
 
       return {
         ...game,
-        mountainsNumber: mountains.length,
+        missionsNumber: missionsOfGame.length,
       }
     })
 
-    const gamesParsed = groupGamesByNMatchOfTheUser(gamesWithMountainsNumber)
+    const gamesParsed = groupGamesByNMatchOfTheUser(gamesWithMissionsNumber)
 
-    const mountainsCompletedPerGame = gamesParsed.map((nGame) => {
+    const missionsCompletedPerGame = gamesParsed.map((nGame, index) => {
       const totalGames = Object.keys(nGame).length
-      let mountainsCompleted = 0
+      let missionsCompleted = 0
 
-      nGame.forEach((game) => {
-        mountainsCompleted += game.mountainsNumber
+      Object.values(nGame).forEach((game) => {
+        missionsCompleted += game.missionsNumber
       })
 
       return {
+        index: index + 1,
         total: totalGames,
-        mountainsCompleted,
-        averageMountains: totalGames / mountainsCompleted,
+        missionsCompleted,
+        averageMissions: missionsCompleted / totalGames,
       }
     })
 
-    setData(mountainsCompletedPerGame)
+    setData(missionsCompletedPerGame)
   }, [])
 
   useEffect(() => {

@@ -10,7 +10,7 @@ export const useGameWinLoseRatioStat = () => {
   const calculateGameWinLoseRatioStat = useCallback((games) => {
     const gamesParsed = groupGamesByNMatchOfTheUser(games)
 
-    const gamesWinLoseRatio = gamesParsed.map((nGame) => {
+    const gamesWinLoseRatio = gamesParsed.map((nGame, index) => {
       const totalGames = Object.keys(nGame).length
       let winnedGames = 0
       let lostGames = 0
@@ -28,6 +28,7 @@ export const useGameWinLoseRatioStat = () => {
       const lostGamesRatio = (lostGames / totalGames) * 100
 
       return {
+        index: index + 1,
         total: totalGames,
         winnedGames,
         winnedGamesRatio,

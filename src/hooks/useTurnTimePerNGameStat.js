@@ -2,30 +2,28 @@
 
 import { useState, useCallback, useEffect } from 'react'
 import { getTurns } from '../services/data'
+import { groupTurnsByNTurnOfGame } from '../utils/turns'
 
 export const useTurnTimePerNGameStat = () => {
   const [data, setData] = useState([])
 
   const calculateTurnTimePerNGameStat = useCallback((turns) => {
-    const turnsGroupedByOrdinalNumber = turns.reduce((acc, turn) => {
-      if (!acc[turn.turn_n]) {
-        acc[turn.turn_n] = []
-      }
+    turns.sort((a, b) => new Date(a.date) - new Date(b.date))
+    const turnsGroupedByOrdinalNumber = groupTurnsByNTurnOfGame(turns)
 
-      acc[turn.turn_n].push(turn)
-      return acc
-    }, {})
-
-    const averageTimePerNTurn = Object.keys(turnsGroupedByOrdinalNumber).map((turnNumber) => {
-      const turns = turnsGroupedByOrdinalNumber[turnNumber]
-      const totalTurnTime = turns.reduce((acc, turn) => acc + turn.turn_time, 0)
-      const averageTurnTime = totalTurnTime / turns.length
+    const averageTimePerNTurn = turnsGroupedByOrdinalNumber.map((turnsByOrdinalNumber, index) => {
+      const totalTurnTime = Object.values(turnsByOrdinalNumber).reduce((acc, turn) => {
+        return acc + turn.turn_duration
+      }, 0)
 
       return {
-        turnNumber,
-        averageTurnTime,
+        turn: index + 1,
+        n_turns: Object.keys(turnsByOrdinalNumber).length,
+        average_time: totalTurnTime / Object.keys(turnsByOrdinalNumber).length,
       }
     })
+
+    console.log(averageTimePerNTurn)
 
     setData(averageTimePerNTurn)
   }, [])
