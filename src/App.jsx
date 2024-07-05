@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { AuthLayout, AnonLayout } from '@/layouts'
 import { Home, Login } from '@/pages'
 
@@ -11,6 +11,7 @@ function App() {
       <Route element={<AnonLayout />}>
         <Route path='/login' element={<Login />} />
       </Route>
+      <Route path='*' element={<Navigate replace to='/' />} />
     </Routes>
   )
 }
