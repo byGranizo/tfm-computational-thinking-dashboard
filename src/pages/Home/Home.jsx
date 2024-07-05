@@ -207,8 +207,3 @@ export function Home() {
     </div>
   )
 }
-
-/*
-admin@riverwood.com
-admin1234
-*/
